@@ -832,6 +832,20 @@ def too_large(e):
 def internal_error(e):
     return jsonify({"error": "Internal server error", "details": str(e)}), 500
 
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({
+        "status": "running",
+        "message": "PDF Table Extractor API",
+        "endpoints": {
+            "/api/health": "GET - Health check",
+            "/api/extract": "POST - Extract tables from PDF",
+            "/api/recalculate": "POST - Recalculate totals",
+            "/api/download-excel": "POST - Generate Excel file",
+            "/api/unit-conversions": "GET - Get unit conversion rules"
+        }
+    }), 200
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
