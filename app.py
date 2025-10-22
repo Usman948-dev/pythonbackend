@@ -16,15 +16,13 @@ import tempfile
 import traceback
 
 app = Flask(__name__)
-CORS(app, resources={
-    r"/api/*": {
-        "origins": "*",
-        "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type"],
-        "expose_headers": ["Content-Type"],
-        "supports_credentials": False
-    }
-})  # Enable CORS for frontend communication
+
+# CORS configuration - CRITICAL for frontend to work
+CORS(app, 
+     resources={r"/api/*": {"origins": "*"}},
+     allow_headers=["Content-Type"],
+     expose_headers=["Content-Type"],
+     supports_credentials=False)  # Enable CORS for frontend communication
 
 # Configuration
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max file size
